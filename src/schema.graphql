@@ -1,0 +1,35 @@
+# import Notification from './generated/prisma.grpahql'
+# import Email from './generated/prisma.grpahql'
+# import Online from './generated/prisma.grpahql'
+
+type Query{
+    notifications(for: String!): [Notification!]!
+}
+type Mutation{
+    createNotification(for:String!, email: EmailInput, online: OnlineInput): Notification
+    updateNotification(id: ID!, online: UpdateOnlineInput): Notification
+
+}
+
+input EmailInput{
+    from: String!
+    to: [String!]!
+    subject: String!
+    body: String!
+    html: Boolean
+}
+
+input OnlineInput{
+    titleEn: String!
+    titleFr: String!
+    descriptionEn: String!
+    descriptionFr: String!
+}
+
+input UpdateOnlineInput{
+    titleEn: String
+    titleFr: String
+    descriptionEn: String
+    descriptionFr: String
+    viewed: Boolean
+}

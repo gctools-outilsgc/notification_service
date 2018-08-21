@@ -1,0 +1,13 @@
+{
+  "name": "notification_service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/gctools-outilsgc/notification_service.git",
+  "author": "Bryan Robitaille <bryan.robitaille@tbs-sct.gc.ca>",
+  "license": "MIT",
+  "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
+    "graphql-yoga": "^1.16.1",
+    "prisma-binding": "^2.1.4"
+  }
+}
