@@ -1,0 +1,31 @@
+enum Status {
+    Sent
+    Queued
+    Failed
+}
+
+type Notification{
+    id: ID! @unique
+    for: String!
+    email: Email
+    online: Online
+}
+
+type Email{
+    id: ID! @unique
+    from: String!
+    to: [String!]!
+    subject: String!
+    body: String!
+    status: Status!
+    html: Boolean! @default(value:"false")
+}
+
+type Online{
+    id: ID! @unique
+    titleEn: String!
+    titleFr: String!
+    descriptionEn: String!
+    descriptionFr: String!
+    viewed: Boolean! @default(value:"false")
+}
