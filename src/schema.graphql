@@ -1,10 +1,11 @@
-# import Notification from './generated/prisma.grpahql'
-# import Email from './generated/prisma.grpahql'
-# import Online from './generated/prisma.grpahql'
+# import Notification from './generated/prisma.graphql'
+# import Email from './generated/prisma.graphql'
+# import Online from './generated/prisma.graphql'
 
 type Query{
-    notifications(for: String!): [Notification!]!
+    notifications(for: String!, viewed: Boolean, skip: Int, first: Int): [Notification!]!
 }
+
 type Mutation{
     createNotification(for:String!, email: EmailInput, online: OnlineInput): Notification
     updateNotification(id: ID!, online: UpdateOnlineInput): Notification
