@@ -1,5 +1,5 @@
 # source: http://localhost:4466/notifications/dev
-# timestamp: Fri Aug 17 2018 17:34:00 GMT-0400 (EDT)
+# timestamp: Tue Aug 21 2018 17:47:07 GMT-0400 (EDT)
 
 type AggregateEmail {
   count: Int!
@@ -24,6 +24,9 @@ type Email implements Node {
   to: [String!]!
   subject: String!
   body: String!
+  status: Status!
+  send_error: String
+  html: Boolean!
 }
 
 """A connection to a list of items."""
@@ -40,6 +43,9 @@ input EmailCreateInput {
   from: String!
   subject: String!
   body: String!
+  status: Status!
+  send_error: String
+  html: Boolean
   to: EmailCreatetoInput
 }
 
@@ -70,6 +76,12 @@ enum EmailOrderByInput {
   subject_DESC
   body_ASC
   body_DESC
+  status_ASC
+  status_DESC
+  send_error_ASC
+  send_error_DESC
+  html_ASC
+  html_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -82,6 +94,9 @@ type EmailPreviousValues {
   to: [String!]!
   subject: String!
   body: String!
+  status: Status!
+  send_error: String
+  html: Boolean!
 }
 
 type EmailSubscriptionPayload {
@@ -127,6 +142,9 @@ input EmailUpdateDataInput {
   from: String
   subject: String
   body: String
+  status: Status
+  send_error: String
+  html: Boolean
   to: EmailUpdatetoInput
 }
 
@@ -134,6 +152,9 @@ input EmailUpdateInput {
   from: String
   subject: String
   body: String
+  status: Status
+  send_error: String
+  html: Boolean
   to: EmailUpdatetoInput
 }
 
@@ -324,6 +345,60 @@ input EmailWhereInput {
 
   """All values not ending with the given string."""
   body_not_ends_with: String
+  status: Status
+
+  """All values that are not equal to given value."""
+  status_not: Status
+
+  """All values that are contained in given list."""
+  status_in: [Status!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [Status!]
+  send_error: String
+
+  """All values that are not equal to given value."""
+  send_error_not: String
+
+  """All values that are contained in given list."""
+  send_error_in: [String!]
+
+  """All values that are not contained in given list."""
+  send_error_not_in: [String!]
+
+  """All values less than the given value."""
+  send_error_lt: String
+
+  """All values less than or equal the given value."""
+  send_error_lte: String
+
+  """All values greater than the given value."""
+  send_error_gt: String
+
+  """All values greater than or equal the given value."""
+  send_error_gte: String
+
+  """All values containing the given string."""
+  send_error_contains: String
+
+  """All values not containing the given string."""
+  send_error_not_contains: String
+
+  """All values starting with the given string."""
+  send_error_starts_with: String
+
+  """All values not starting with the given string."""
+  send_error_not_starts_with: String
+
+  """All values ending with the given string."""
+  send_error_ends_with: String
+
+  """All values not ending with the given string."""
+  send_error_not_ends_with: String
+  html: Boolean
+
+  """All values that are not equal to given value."""
+  html_not: Boolean
 }
 
 input EmailWhereUniqueInput {
@@ -565,6 +640,7 @@ type Online implements Node {
   titleFr: String!
   descriptionEn: String!
   descriptionFr: String!
+  viewed: Boolean!
 }
 
 """A connection to a list of items."""
@@ -582,6 +658,7 @@ input OnlineCreateInput {
   titleFr: String!
   descriptionEn: String!
   descriptionFr: String!
+  viewed: Boolean
 }
 
 input OnlineCreateOneInput {
@@ -609,6 +686,8 @@ enum OnlineOrderByInput {
   descriptionEn_DESC
   descriptionFr_ASC
   descriptionFr_DESC
+  viewed_ASC
+  viewed_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -621,6 +700,7 @@ type OnlinePreviousValues {
   titleFr: String!
   descriptionEn: String!
   descriptionFr: String!
+  viewed: Boolean!
 }
 
 type OnlineSubscriptionPayload {
@@ -667,6 +747,7 @@ input OnlineUpdateDataInput {
   titleFr: String
   descriptionEn: String
   descriptionFr: String
+  viewed: Boolean
 }
 
 input OnlineUpdateInput {
@@ -674,6 +755,7 @@ input OnlineUpdateInput {
   titleFr: String
   descriptionEn: String
   descriptionFr: String
+  viewed: Boolean
 }
 
 input OnlineUpdateOneInput {
@@ -899,6 +981,10 @@ input OnlineWhereInput {
 
   """All values not ending with the given string."""
   descriptionFr_not_ends_with: String
+  viewed: Boolean
+
+  """All values that are not equal to given value."""
+  viewed_not: Boolean
 }
 
 input OnlineWhereUniqueInput {
@@ -936,6 +1022,11 @@ type Query {
     """The ID of an object"""
     id: ID!
   ): Node
+}
+
+enum Status {
+  Sent
+  Queued
 }
 
 type Subscription {

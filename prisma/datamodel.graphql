@@ -1,7 +1,6 @@
 enum Status {
     Sent
     Queued
-    Failed
 }
 
 type Notification{
@@ -18,6 +17,7 @@ type Email{
     subject: String!
     body: String!
     status: Status!
+    send_error: String
     html: Boolean! @default(value:"false")
 }
 
