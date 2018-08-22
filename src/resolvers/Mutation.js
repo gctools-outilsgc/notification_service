@@ -9,25 +9,35 @@ async function createNotification(_, args, context, info){
     data.for = args.for
 
     if (args.email !== undefined){
-        data.email = {
-            create:{
-                from: args.email.from,
-                to: {
-                    set: args.email.to
-                },
-                subject: args.email.subject,
-                body: args.email.body,
-                html: args.email.html,
-                status: "Sent" 
-            }
+        data.email = {            
+            from: args.email.from,
+            to: args.email.to,            
+            subject: args.email.subject,
+            body: args.email.body,
+            html: args.email.html,            
         }   
-        /* const send_error = await mailer.sendEmail(context, data.email)
+        const send_error = await mailer.sendEmail(context, data.email)
         if (send_error !== undefined) {
-            data.email.error = sent_error
+            data.email.send_error = sent_error
             data.email.status = "Queued"
         } else {
             data.email.status = "Sent"
-        }*/
+        }
+        // transform data structure to meet Prisma mutation requirement
+
+        data.email = {
+            create:{
+                from: data.email.from,
+                to:{
+                    set: data.email.to
+                },
+                subject: data.email.subject,
+                body: data.email.body,
+                html: data.email.html,
+                status: data.email.status,
+                send_error: data.email.send_error
+            }
+        }
     } 
 
     if (args.online !== undefined){
@@ -40,7 +50,8 @@ async function createNotification(_, args, context, info){
             }
         }
     }
-    
+
+
     return await context.prisma.mutation.createNotification({
         data: data
     }, info)
