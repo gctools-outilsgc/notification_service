@@ -62,3 +62,6 @@ typings/
 
 # config file secrets
 src/config.env
+
+# vscode
+.vscode/
