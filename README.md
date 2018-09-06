@@ -1,5 +1,6 @@
 # notification_service
 A notification micro-service built on prisma and graphql-yoga
-## Environment varialbes declared in .env file at root of project
-Variables include:
+## Variables that need declaring
+Environment variables need to be declared in '.env' file placed at the root of the project
+###Variables include:
 - SENDGRID_API_KEY
